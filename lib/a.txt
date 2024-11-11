@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+
+Widget _buildButtonRow(List<String> buttons) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: buttons.map((button) {
+      return _numButton(button);
+    }).toList(),
+  );
+}
+
+Widget _numButton(String label, {void Function()? onTap}) {
+  Color sCol;
+  if (label == '.' || label == 'AC')
+    sCol = Color.fromRGBO(115, 115, 115, 1.0);
+  else
+    sCol = Color.fromRGBO(218, 119, 14, 1.0);
+  return GestureDetector(
+    //onTap: onTap ?? () => calculate(label),
+    child: Container(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(15),
+      width: 85,
+      height: 85,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: sCol,
+        borderRadius: BorderRadius.circular(35),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 35,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    ),
+  );
+}
+
+class Section1Screen extends StatefulWidget {
+  @override
+  Section1 createState() => Section1();
+}
+
+class Section1 extends State<Section1Screen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(top: 25),
+          child: Text(
+            'Масса',
+            style: TextStyle(
+                fontSize: 40,
+                fontFamily: 'Arial',
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+            ),
+            overflow: TextOverflow.visible,
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(51, 51, 51, 1.0),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          // Отображение набранных чисел
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 0),
+            margin: EdgeInsets.symmetric(vertical: 25),
+            alignment: Alignment.center,
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(218, 119, 14, 1.0),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              '0',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 0),
+            margin: EdgeInsets.symmetric(vertical: 25),
+            alignment: Alignment.center,
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(115, 115, 115, 1.0),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              '0',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          _buildButtonRow(['7', '8', '9']),
+          _buildButtonRow(['4', '5', '6']),
+          _buildButtonRow(['1', '2', '3']),
+          _buildButtonRow(['0', '.', 'AC']),
+        ],
+      ),
+    );
+  }
+}
